@@ -1,0 +1,29 @@
+<h2>{{title}}</h2>
+
+<div id="ov-form">
+    <form>
+        <br />
+        <label for="totalCount">Total Number of Balls:</label>
+        <input id="totalCount" type="number" name="totalCount" [(ngModel)]="totalCount" />
+        <br /><br />
+        <label for="drawnCount">Number of Balls Drawn:</label>
+        <input id="drawnCount" type="number" name="drawnCount" [(ngModel)]="drawnCount" />
+        <br /><br />
+        <button class="ov-button" (click)="this.getOdds(totalCount, drawnCount)">Calculate Odds</button>
+        <br /><br />
+    </form>
+    <hr />
+    <table
+        *ngIf="this.oddsApiResponse != null && this.oddsApiResponse.data != null && this.oddsApiResponse.data.length > 0">
+        <thead>
+            <th>Numbers Matched</th>
+            <th>Calculated Odds</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let odd of this.oddsApiResponse.data">
+                <td>{{odd.mainMatch}} Main Numbers</td>
+                <td>1 in {{odd.perOddsCount}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
